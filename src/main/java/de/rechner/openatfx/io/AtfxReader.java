@@ -234,7 +234,15 @@ public class AtfxReader {
         Map<String, String> map = new HashMap<String, String>();
         while (!(reader.isEndElement() && reader.getLocalName().equals(AtfxTagConstants.DOCUMENTATION))) {
             if (reader.isStartElement()) {
-                map.put(reader.getLocalName(), reader.getElementText());
+                //map.put(reader.getLocalName(), reader.getElementText());
+                try{
+                     map.put(reader.getLocalName(), reader.getElementText());
+                }catch(Exception e){
+                     // exception added by apw, this handles case in which documentation elements cause trouble.
+                     continue;
+                }
+
+
             }
             reader.nextTag();
         }

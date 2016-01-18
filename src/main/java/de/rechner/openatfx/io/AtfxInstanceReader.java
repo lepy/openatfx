@@ -121,7 +121,17 @@ class AtfxInstanceReader {
             for (Entry<String, T_LONGLONG[]> relInstEntry : entry.getValue().entrySet()) {
                 String relName = relInstEntry.getKey();
                 T_LONGLONG[] relIids = relInstEntry.getValue();
-                applElemAccess.setRelInst(elemId, relName, relIids, SetType.APPEND);
+                //applElemAccess.setRelInst(elemId, relName, relIids, SetType.APPEND);
+		try{
+  
+          		applElemAccess.setRelInst(elemId, relName, relIids, SetType.APPEND);
+                  
+		}catch (AoException e){
+                      // exception added by apw, handles cases in which some elements are referenced but 
+		      // are missing from the file
+                      
+			continue;
+ 
             }
         }
 
